@@ -1,4 +1,4 @@
-import { useNavigation } from 'expo-router';
+import { Router, useNavigation, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
   View,
@@ -9,21 +9,21 @@ import {
   Alert,
   SafeAreaView,
 } from 'react-native';
-import NewAccount from './NewAccount';
 
 export default function Login() {
 
-  const navigation = useNavigation();
-  const [email, setEmail] = useState('');
+  const [document, setDocument] = useState('');
   const [password, setPassword] = useState('');
+  const router: Router = useRouter();
 
   const handleLogin = () => {
-    Alert.alert('Login', `Email: ${email}\nSenha: ${password}`);
+    router.push('/Home');
+    Alert.alert('Login', `Documento: ${document}\nSenha: ${password}`);
   };
 
   const handleCreateAccount = () => {
-
-    navigation.navigate('NewAccount');
+    router.push('/NewAccount');
+    console.log('Criar conta pressionado');
   };
 
   return (
@@ -34,10 +34,10 @@ export default function Login() {
         <TextInput
           style={styles.input}
           placeholder="Documento"
-          keyboardType="email-address"
+          keyboardType="numeric"
           autoCapitalize="none"
-          value={email}
-          onChangeText={setEmail}
+          value={document}
+          onChangeText={setDocument}
         />
 
         <TextInput
